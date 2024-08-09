@@ -74,9 +74,6 @@ Run the tests with
 ```shell
 ./dist/bin/test_llist -j1 --verbose
 ```
-## Code::Blocks
-
-Use [Code::Blocks IDE](https://www.codeblocks.org/) to open [.codeblocks/project.cbp](.codeblocks/project.cbp). 
 
 ## `clang-format`
 
