@@ -8,8 +8,8 @@ The project has been initialized with a [CMakeLists.txt](CMakeLists.txt)-based
 configuration for building with CMake:
 
 ```shell
-# change into the build directory
-cd build/cmake
+# make build directory and change into it
+mkdir -p build/cmake && cd build/cmake
 
 # generate the build files
 cmake ../..
