@@ -1,6 +1,6 @@
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
 
-# 50700_gadt_llist
+# Generic Abstract Data Type library for linked lists in C
 
 ## CMake
 
