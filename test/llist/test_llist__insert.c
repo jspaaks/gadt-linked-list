@@ -1,7 +1,6 @@
 #include "llist/llist.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include <unistd.h>
 
 static LinkedList * lst = NULL;
 
