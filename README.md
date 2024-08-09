@@ -87,6 +87,17 @@ clang-format -Werror --dry-run main.c
 clang-format -i `find ./src -type f -name '*.[c|h]'`
 ```
 
+## Documentation
+
+File `include/llist/llist.h` has been documented with [Doxygen](https://www.doxygen.nl/) comments. Read it as plain text, or generate HTML documentation by running:
+
+```shell
+cd <the project root>
+doxygen
+```
+
+Output will appear in `build/doxygen`.
+
 ## Acknowledgements
 
 _This project was generated using [Copier](https://pypi.org/project/copier) and [copier-template-for-c-projects](https://github.com/jspaaks/copier-template-for-c-projects)._
