@@ -1,14 +1,4 @@
-# compiled files:
-*.bin
-
-# editor config files
-.vscode
-
-# nano editor tmp files
-.*.swp
-
-# generated files
-*.d
-*.o
-
-
+/build
+/cachegrind.out.*
+/callgrind.out.*
+/.codeblocks

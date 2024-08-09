@@ -1,101 +1,95 @@
-# KNK
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
 
-Programming exercises for KN King's book _C programming - a modern approach_.
+# 50700_gadt_llist
 
-## Pre 359
+## CMake
 
-Compile `*.c` files with:
+The project has been initialized with a [CMakeLists.txt](CMakeLists.txt)-based
+configuration for building with CMake:
 
 ```shell
-export BASENAME=<filename without '.c' extension>
-gcc -Wall -Wextra -std=c99 ${BASENAME}.c -o ${BASENAME}.bin
+# change into the build directory
+cd build/cmake
+
+# generate the build files
+cmake ../..
+
+# build the project
+cmake --build .
+
+# install the project to <repo>/build/cmake/dist
+cmake --install .
+
+# run the program to see if it works
+./dist/bin/demo
 ```
 
-Then run the binary with:
+Should output something like:
 
-```shell
-./${BASENAME}.bin
+```text
+ --- LinkedList library demonstrator ---
+Creating an instance of LinkedList containing ints:
+[]
+
+Add an item to the linked list:
+[0x7ffd14b81268]
+
+Let's use a custom printer to show what's in the LinkedList nodes:
+ -- LinkedList[1] = {102}
+
+Continue inserting but keep using the custom print method:
+ -- LinkedList[2] = {100, 102}
+ -- LinkedList[3] = {100, 102, 103}
+ -- LinkedList[4] = {100, 101, 102, 103}
+
+Deleting the first item greater than 100:
+ -- LinkedList[3] = {100, 102, 103}
+
+Deleting all items greater than 100:
+ -- LinkedList[1] = {100}
+
+
+In the same program, create an instance of LinkedList of float
+and add some items to it. Use a custom printer for displaying
+the payload of each node:
+ -- []
+ -- [202.00]
+ -- [200.00, 202.00]
+ -- [200.00, 202.00, 203.00]
+ -- [200.00, 201.00, 202.00, 203.00]
+
+Done.
 ```
 
-## Post 359
+## Testing
 
-Makefiles are introduced at 359. Compile subsequent projects with:
-
-```shell
-make
-```
-The above command should generate an executable file, e.g. `program`, which can then be run as follows:
+The tests require that [Criterion](https://github.com/Snaipe/Criterion) is installed on the system, e.g. with
 
 ```shell
-./program
+sudo apt install libcriterion-dev
 ```
 
-Clean up the tree with:
+Run the tests with
 
 ```shell
-make clean
+./dist/bin/test_llist -j1 --verbose
 ```
+## Code::Blocks
 
-## Formatting with `clang-format`
+Use [Code::Blocks IDE](https://www.codeblocks.org/) to open [.codeblocks/project.cbp](.codeblocks/project.cbp). 
 
-`clang-format` formats *.c files (as well as other formats), is customizable, and can inherit
-from existing published style guide, e.g. Google, LLVM, etc. See
-https://clang.llvm.org/docs/ClangFormatStyleOptions.html. 
+## `clang-format`
+
+The file `.clang-format` contains an initial configuration for (automatic) formatting with [clang-format](https://clang.llvm.org/docs/ClangFormat.html). Run the formatter with e.g.:
 
 ```shell
-# print warnings, don't change files
+# dry run on main.c
 clang-format -Werror --dry-run main.c
 
-# print main.c to stdout including changes,
-# but don't change main.c itself
-clang-format main.c
-
-# change file in-place
-clang-format -i main.c
+# format in place all *.c and *.h files under ./src
+clang-format -i `find ./src -type f -name '*.[c|h]'`
 ```
 
-## Debugging with Valgrind: memcheck
+## Acknowledgements
 
-`valgrind` can help detect various kinds of errors. By default it runs `memcheck`, which detects memory errors:
-
-```shell
-$ valgrind ./program
-$ valgrind tool=memcheck ./program
-$ valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./program
-```
-
-To have Valgrind output the relevant line numbers, recompile the binary with `-g` flag ("include debugging information")
-and `-O0` ("disable optimization"). Note that this requires recompiling the objects as well.
-
-See https://valgrind.org/ for more information.
-
-## Debugging with Valgrind: cachegrind
-
-\# TODO
-
-## Debugging with Valgrind: callgrind
-
-\# TODO
-
-## Other
-
-- https://cdecl.org/ for decoding declarations
-
----
-
-Have `gcc` generate Assembler code
-
-```shell
-gcc -c -S main.c   # generates main.s
-```
-
-Printing the shared objects (shared libraries) required by each program or shared object specified on the command line:
-
-```shell
-ldd program
-```
-
-List the symbols from an object file:
-```shell
-nm main.o
-```
+_This project was generated using [Copier](https://pypi.org/project/copier) and [copier-template-for-c-projects](https://github.com/jspaaks/copier-template-for-c-projects)._
