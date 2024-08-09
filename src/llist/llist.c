@@ -15,6 +15,11 @@ struct llist {
     Node * firstnode;
 };
 
+void llist__append (LinkedList * lst, void * item) {
+    size_t n = llist__get_length(lst);
+    llist__insert(n, item, lst);
+}
+
 LinkedList * llist__create (void) {
     LinkedList * lst = malloc(sizeof(LinkedList) * 1);
     if (lst == NULL) {
@@ -93,17 +98,12 @@ void llist__insert (const size_t pos, void * item, LinkedList * lst) {
     lst->nelems++;
 }
 
-void llist__append (LinkedList * lst, void * item) {
-    size_t n = llist__get_length(lst);
-    llist__insert(n, item, lst);
+size_t llist__get_length (const LinkedList * lst) {
+    return lst->nelems;
 }
 
 void llist__prepend (LinkedList * lst, void * item) {
     llist__insert(0, item, lst);
-}
-
-size_t llist__get_length (const LinkedList * lst) {
-    return lst->nelems;
 }
 
 void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * sink) {
