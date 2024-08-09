@@ -1,34 +1,34 @@
-#include <stdio.h>
-#include <math.h>
 #include "llist/llist.h"
+#include <math.h>
+#include <stdio.h>
 
 typedef llist__Printers Printers;
 
-static void printer_pre(FILE * sink, size_t nelems) {
+static void printer_pre (FILE * sink, size_t nelems) {
     fprintf(sink, " -- LinkedList[%ld] = {", nelems);
 }
 
-static void printer_int_elem(FILE * sink, size_t idx, size_t nelems, void * p) {
+static void printer_int_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%d, ", *((int *) p)); 
+        fprintf(sink, "%d, ", *((int *) p));
     } else {
-        fprintf(sink, "%d", *((int *) p)); 
+        fprintf(sink, "%d", *((int *) p));
     }
 }
 
-static void printer_float_elem(FILE * sink, size_t idx, size_t nelems, void * p) {
+static void printer_float_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%.2f, ", *((float *) p)); 
+        fprintf(sink, "%.2f, ", *((float *) p));
     } else {
-        fprintf(sink, "%.2f", *((float *) p)); 
+        fprintf(sink, "%.2f", *((float *) p));
     }
 }
 
-static void printer_post(FILE * sink, size_t) {
+static void printer_post (FILE * sink, size_t) {
     fprintf(sink, "}\n");
 }
 
-static bool filter(void * p) {
+static bool filter (void * p) {
     int elem = *((int *) p);
     return elem > 100;
 }
@@ -37,11 +37,7 @@ int main (void) {
 
     int arr1[] = { 100, 101, 102, 103 };
 
-    Printers printers1 = {
-        .pre = printer_pre,
-        .elem = printer_int_elem,
-        .post = printer_post
-    };
+    Printers printers1 = { .pre = printer_pre, .elem = printer_int_elem, .post = printer_post };
 
     fprintf(stdout, " --- LinkedList library demonstrator ---\n");
 
@@ -78,37 +74,32 @@ int main (void) {
     llist__print(stdout, lst1, &printers1);
     fprintf(stdout, "\n");
 
-
     // ---------------------------------------------------------- //
 
     fprintf(stdout, "\n");
 
     float arr2[] = { 200.0f, 201.0f, 202.0f, 203.0f };
-  
-    Printers printers2 = {
-        .pre = NULL,
-        .elem = printer_float_elem,
-        .post = NULL
-    };
+
+    Printers printers2 = { .pre = NULL, .elem = printer_float_elem, .post = NULL };
 
     fprintf(stdout, "In the same program, create an instance of LinkedList of float\nand add "
-            "some items to it. Use a custom printer for displaying\nthe payload of each node:\n");
+                    "some items to it. Use a custom printer for displaying\nthe payload of each node:\n");
     LinkedList * lst2 = llist__create();
     fprintf(stdout, " -- ");
     llist__print(stdout, lst2, &printers2);
-  
+
     llist__insert(lst2, 0, (void *) &arr2[2]);
     fprintf(stdout, " -- ");
     llist__print(stdout, lst2, &printers2);
-  
+
     llist__insert(lst2, 0, (void *) &arr2[0]);
     fprintf(stdout, " -- ");
     llist__print(stdout, lst2, &printers2);
-  
+
     llist__insert(lst2, 2, (void *) &arr2[3]);
     fprintf(stdout, " -- ");
     llist__print(stdout, lst2, &printers2);
-  
+
     llist__insert(lst2, 1, (void *) &arr2[1]);
     fprintf(stdout, " -- ");
     llist__print(stdout, lst2, &printers2);

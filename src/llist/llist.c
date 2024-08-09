@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 typedef struct node Node;
 
@@ -16,7 +15,7 @@ struct llist {
     Node * firstnode;
 };
 
-LinkedList * llist__create(void) {
+LinkedList * llist__create (void) {
     LinkedList * lst = malloc(sizeof(LinkedList) * 1);
     if (lst == NULL) {
         fprintf(stderr, "Something went wrong allocating memory for linked list.\n");
@@ -27,7 +26,7 @@ LinkedList * llist__create(void) {
     return lst;
 }
 
-void llist__delete(LinkedList * lst, bool (*filter)(void *), bool global) {
+void llist__delete (LinkedList * lst, bool (*filter)(void *), bool global) {
     Node * prev = NULL;
     Node * curr = lst->firstnode;
     while (curr != NULL) {
@@ -55,7 +54,7 @@ void llist__delete(LinkedList * lst, bool (*filter)(void *), bool global) {
     }
 }
 
-void llist__destroy(LinkedList ** lst) {
+void llist__destroy (LinkedList ** lst) {
     Node * curr = (*lst)->firstnode;
     while (curr != NULL) {
         struct node * tmp = curr;
@@ -68,7 +67,7 @@ void llist__destroy(LinkedList ** lst) {
     *lst = NULL;
 }
 
-void llist__insert(LinkedList * lst, size_t pos, void * item) {
+void llist__insert (LinkedList * lst, size_t pos, void * item) {
     Node * new = malloc(sizeof(Node) * 1);
     if (new == NULL) {
         fprintf(stderr, "Something went wrong allocating memory for new node in linked list.\n");
@@ -94,20 +93,20 @@ void llist__insert(LinkedList * lst, size_t pos, void * item) {
     lst->nelems++;
 }
 
-void llist__append(LinkedList * lst, void * item) {
+void llist__append (LinkedList * lst, void * item) {
     size_t n = llist__get_length(lst);
-    llist__insert(lst, n, item);  
+    llist__insert(lst, n, item);
 }
 
-void llist__prepend(LinkedList * lst, void * item) {
-    llist__insert(lst, 0, item);  
+void llist__prepend (LinkedList * lst, void * item) {
+    llist__insert(lst, 0, item);
 }
 
 size_t llist__get_length (LinkedList * lst) {
     return lst->nelems;
 }
 
-void llist__print(FILE * sink, LinkedList * lst, llist__Printers * printers) {
+void llist__print (FILE * sink, LinkedList * lst, llist__Printers * printers) {
 
     // -- print preamble
     if (printers == NULL || printers->pre == NULL) {
