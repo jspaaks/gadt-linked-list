@@ -1,11 +1,11 @@
+#include "llist/llist.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "llist/llist.h"
 #include <unistd.h>
 
 typedef llist__Printers Printers;
 
-static LinkedList * lst = NULL; 
+static LinkedList * lst = NULL;
 
 static void setup (void) {
     cr_redirect_stdout();
@@ -18,20 +18,16 @@ static void teardown (void) {
 
 static void print_elem (FILE * sink, size_t idx, size_t nelems, void * elem) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%d, ", *((int *) elem)); 
+        fprintf(sink, "%d, ", *((int *) elem));
     } else {
-        fprintf(sink, "%d", *((int *) elem)); 
+        fprintf(sink, "%d", *((int *) elem));
     }
 }
 
-static Printers printers = {
-    .pre = NULL,
-    .elem = print_elem,
-    .post = NULL
-};
+static Printers printers = { .pre = NULL, .elem = print_elem, .post = NULL };
 
 Test(llist__append, four_items, .init = setup, .fini = teardown) {
-    int arr[] = {100, 101, 102, 103};
+    int arr[] = { 100, 101, 102, 103 };
     llist__append(lst, (void *) &arr[0]);
     llist__append(lst, (void *) &arr[1]);
     llist__append(lst, (void *) &arr[2]);

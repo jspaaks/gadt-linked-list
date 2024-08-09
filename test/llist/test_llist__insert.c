@@ -1,9 +1,9 @@
+#include "llist/llist.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "llist/llist.h"
 #include <unistd.h>
 
-static LinkedList * lst = NULL; 
+static LinkedList * lst = NULL;
 
 typedef llist__Printers Printers;
 
@@ -18,20 +18,16 @@ static void teardown (void) {
 
 static void print_elem (FILE * sink, size_t idx, size_t nelems, void * elem) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%d, ", *((int *) elem)); 
+        fprintf(sink, "%d, ", *((int *) elem));
     } else {
-        fprintf(sink, "%d", *((int *) elem)); 
+        fprintf(sink, "%d", *((int *) elem));
     }
 }
 
-static Printers printers = {
-    .pre = NULL,
-    .elem = print_elem,
-    .post = NULL
-};
+static Printers printers = { .pre = NULL, .elem = print_elem, .post = NULL };
 
 Test(llist__insert, four_items_out_of_order, .init = setup, .fini = teardown) {
-    int arr[] = {100, 101, 102, 103};
+    int arr[] = { 100, 101, 102, 103 };
     llist__insert(lst, 0, (void *) &arr[2]);
     llist__insert(lst, 0, (void *) &arr[0]);
     llist__insert(lst, 2, (void *) &arr[3]);

@@ -1,6 +1,5 @@
-#include <criterion/criterion.h>
 #include "llist/llist.h"
-
+#include <criterion/criterion.h>
 
 Test(llist__destroy, noop) {
     LinkedList * lst = llist__create();
