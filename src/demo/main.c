@@ -5,7 +5,7 @@
 typedef llist__Printers Printers;
 
 static void printer_pre (FILE * sink, size_t nelems) {
-    fprintf(sink, " -- LinkedList[%ld] = {", nelems);
+    fprintf(sink, " -- LinkedList[%zu] = {", nelems);
 }
 
 static void printer_int_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
