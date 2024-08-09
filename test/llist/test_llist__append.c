@@ -31,7 +31,7 @@ Test(llist__append, four_items, .init = setup, .fini = teardown) {
     llist__append(lst, (void *) &arr[1]);
     llist__append(lst, (void *) &arr[2]);
     llist__append(lst, (void *) &arr[3]);
-    llist__print(stdout, lst, &printers);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[100, 101, 102, 103]\n");
 }

@@ -29,21 +29,21 @@ Test(llist__get_length, noop, .init = setup, .fini = teardown) {
     size_t expected = 0;
     size_t actual = llist__get_length(lst);
     cr_assert(actual == expected, "Instance of LinkedList should be of length %ld but was %ld.\n", expected, actual);
-    llist__print(stdout, lst, &printers);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[]\n");
 }
 
 Test(llist__get_length, after_inserting_four_items, .init = setup, .fini = teardown) {
     int arr[] = { 100, 101, 102, 103 };
-    llist__insert(lst, 0, (void *) &arr[3]);
-    llist__insert(lst, 0, (void *) &arr[2]);
-    llist__insert(lst, 0, (void *) &arr[1]);
-    llist__insert(lst, 0, (void *) &arr[0]);
+    llist__insert(0, (void *) &arr[3], lst);
+    llist__insert(0, (void *) &arr[2], lst);
+    llist__insert(0, (void *) &arr[1], lst);
+    llist__insert(0, (void *) &arr[0], lst);
     constexpr size_t expected = sizeof(arr) / sizeof(arr[0]);
     size_t actual = llist__get_length(lst);
     cr_assert(actual == expected, "Instance of LinkedList should be of length %ld but was %ld.\n", expected, actual);
-    llist__print(stdout, lst, &printers);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[100, 101, 102, 103]\n");
 }

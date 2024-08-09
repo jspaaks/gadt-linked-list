@@ -27,11 +27,11 @@ static Printers printers = { .pre = NULL, .elem = print_elem, .post = NULL };
 
 Test(llist__insert, four_items_out_of_order, .init = setup, .fini = teardown) {
     int arr[] = { 100, 101, 102, 103 };
-    llist__insert(lst, 0, (void *) &arr[2]);
-    llist__insert(lst, 0, (void *) &arr[0]);
-    llist__insert(lst, 2, (void *) &arr[3]);
-    llist__insert(lst, 1, (void *) &arr[1]);
-    llist__print(stdout, lst, &printers);
+    llist__insert(0, (void *) &arr[2], lst);
+    llist__insert(0, (void *) &arr[0], lst);
+    llist__insert(2, (void *) &arr[3], lst);
+    llist__insert(1, (void *) &arr[1], lst);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[100, 101, 102, 103]\n");
 }

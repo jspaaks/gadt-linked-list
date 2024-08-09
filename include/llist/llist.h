@@ -13,11 +13,11 @@ typedef struct printers {
 
 void llist__append (LinkedList *, void *);
 LinkedList * llist__create (void);
-void llist__delete (LinkedList *, bool (*)(void *), bool);
+void llist__delete (const bool, LinkedList *, bool (*)(void *));
 void llist__destroy (LinkedList **);
-void llist__insert (LinkedList *, size_t, void *);
-size_t llist__get_length (LinkedList *);
+void llist__insert (const size_t, void *, LinkedList *);
+size_t llist__get_length (const LinkedList *);
 void llist__prepend (LinkedList *, void *);
-void llist__print (FILE *, LinkedList *, llist__Printers *);
+void llist__print (const LinkedList *, const llist__Printers *, FILE *);
 
 #endif

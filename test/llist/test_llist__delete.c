@@ -48,15 +48,15 @@ static bool filter (void * p) {
 }
 
 Test(llist__delete, global, .init = setup, .fini = teardown) {
-    llist__delete(lst, filter, true);
-    llist__print(stdout, lst, &printers);
+    llist__delete(true, lst, filter);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[{.marked: false, .data: 101}, {.marked: false, .data: 103}]\n");
 }
 
 Test(llist__delete, local, .init = setup, .fini = teardown) {
-    llist__delete(lst, filter, false);
-    llist__print(stdout, lst, &printers);
+    llist__delete(false, lst, filter);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str(
         "[{.marked: false, .data: 101}, {.marked: false, .data: 102}, {.marked: false, .data: 103}]\n");

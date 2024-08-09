@@ -26,7 +26,7 @@ static void print_elem (FILE * sink, size_t idx, size_t nelems, void * elem) {
 static Printers printers = { .pre = NULL, .elem = print_elem, .post = NULL };
 
 Test(llist__create, first, .init = setup, .fini = teardown) {
-    llist__print(stdout, lst, &printers);
+    llist__print(lst, &printers, stdout);
     fflush(stdout);
     cr_assert_stdout_eq_str("[]\n");
 }

@@ -43,35 +43,35 @@ int main (void) {
 
     fprintf(stdout, "Creating an instance of LinkedList containing ints:\n");
     LinkedList * lst1 = llist__create();
-    llist__print(stdout, lst1, NULL);
+    llist__print(lst1, NULL, stdout);
     fprintf(stdout, "\n");
 
     fprintf(stdout, "Add an item to the linked list:\n");
-    llist__insert(lst1, 0, (void *) &arr1[2]);
-    llist__print(stdout, lst1, NULL);
+    llist__insert(0, (void *) &arr1[2], lst1);
+    llist__print(lst1, NULL, stdout);
     fprintf(stdout, "\n");
 
     fprintf(stdout, "Let's use a custom printer to show what's in the LinkedList nodes:\n");
-    llist__print(stdout, lst1, &printers1);
+    llist__print(lst1, &printers1, stdout);
     fprintf(stdout, "\n");
 
     fprintf(stdout, "Continue inserting but keep using the custom print method:\n");
-    llist__insert(lst1, 0, (void *) &arr1[0]);
-    llist__print(stdout, lst1, &printers1);
-    llist__insert(lst1, 2, (void *) &arr1[3]);
-    llist__print(stdout, lst1, &printers1);
-    llist__insert(lst1, 1, (void *) &arr1[1]);
-    llist__print(stdout, lst1, &printers1);
+    llist__insert(0, (void *) &arr1[0], lst1);
+    llist__print(lst1, &printers1, stdout);
+    llist__insert(2, (void *) &arr1[3], lst1);
+    llist__print(lst1, &printers1, stdout);
+    llist__insert(1, (void *) &arr1[1], lst1);
+    llist__print(lst1, &printers1, stdout);
     fprintf(stdout, "\n");
 
     fprintf(stdout, "Deleting the first item greater than 100:\n");
-    llist__delete(lst1, filter, false);
-    llist__print(stdout, lst1, &printers1);
+    llist__delete(false, lst1, filter);
+    llist__print(lst1, &printers1, stdout);
     fprintf(stdout, "\n");
 
     fprintf(stdout, "Deleting all items greater than 100:\n");
-    llist__delete(lst1, filter, true);
-    llist__print(stdout, lst1, &printers1);
+    llist__delete(true, lst1, filter);
+    llist__print(lst1, &printers1, stdout);
     fprintf(stdout, "\n");
 
     // ---------------------------------------------------------- //
@@ -86,23 +86,23 @@ int main (void) {
                     "some items to it. Use a custom printer for displaying\nthe payload of each node:\n");
     LinkedList * lst2 = llist__create();
     fprintf(stdout, " -- ");
-    llist__print(stdout, lst2, &printers2);
+    llist__print(lst2, &printers2, stdout);
 
-    llist__insert(lst2, 0, (void *) &arr2[2]);
+    llist__insert(0, (void *) &arr2[2], lst2);
     fprintf(stdout, " -- ");
-    llist__print(stdout, lst2, &printers2);
+    llist__print(lst2, &printers2, stdout);
 
-    llist__insert(lst2, 0, (void *) &arr2[0]);
+    llist__insert(0, (void *) &arr2[0], lst2);
     fprintf(stdout, " -- ");
-    llist__print(stdout, lst2, &printers2);
+    llist__print(lst2, &printers2, stdout);
 
-    llist__insert(lst2, 2, (void *) &arr2[3]);
+    llist__insert(2, (void *) &arr2[3], lst2);
     fprintf(stdout, " -- ");
-    llist__print(stdout, lst2, &printers2);
+    llist__print(lst2, &printers2, stdout);
 
-    llist__insert(lst2, 1, (void *) &arr2[1]);
+    llist__insert(1, (void *) &arr2[1], lst2);
     fprintf(stdout, " -- ");
-    llist__print(stdout, lst2, &printers2);
+    llist__print(lst2, &printers2, stdout);
 
     fprintf(stdout, "\nDone.\n");
 

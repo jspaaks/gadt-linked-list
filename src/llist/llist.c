@@ -26,7 +26,7 @@ LinkedList * llist__create (void) {
     return lst;
 }
 
-void llist__delete (LinkedList * lst, bool (*filter)(void *), bool global) {
+void llist__delete (const bool global, LinkedList * lst, bool (*filter)(void *)) {
     Node * prev = NULL;
     Node * curr = lst->firstnode;
     while (curr != NULL) {
@@ -67,7 +67,7 @@ void llist__destroy (LinkedList ** lst) {
     *lst = NULL;
 }
 
-void llist__insert (LinkedList * lst, size_t pos, void * item) {
+void llist__insert (const size_t pos, void * item, LinkedList * lst) {
     Node * new = malloc(sizeof(Node) * 1);
     if (new == NULL) {
         fprintf(stderr, "Something went wrong allocating memory for new node in linked list.\n");
@@ -95,18 +95,18 @@ void llist__insert (LinkedList * lst, size_t pos, void * item) {
 
 void llist__append (LinkedList * lst, void * item) {
     size_t n = llist__get_length(lst);
-    llist__insert(lst, n, item);
+    llist__insert(n, item, lst);
 }
 
 void llist__prepend (LinkedList * lst, void * item) {
-    llist__insert(lst, 0, item);
+    llist__insert(0, item, lst);
 }
 
-size_t llist__get_length (LinkedList * lst) {
+size_t llist__get_length (const LinkedList * lst) {
     return lst->nelems;
 }
 
-void llist__print (FILE * sink, LinkedList * lst, llist__Printers * printers) {
+void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * sink) {
 
     // -- print preamble
     if (printers == NULL || printers->pre == NULL) {
