@@ -25,10 +25,10 @@ typedef struct {
      *                such as opening brackets to the linked list
      *                elements.
      *
-     * @param sink    Where the printer prints its output.
+     * @param fd      Where the printer prints its output.
      * @param nelems  The total number of elements in the linked list.
      */
-    void (*pre)(FILE * sink, size_t nelems);
+    void (*pre)(FILE * fd, size_t nelems);
 
 
 
@@ -36,7 +36,7 @@ typedef struct {
      * @brief         Printer function used to print individual
      *                elements from the linked list.
      *
-     * @param sink    Where the printer prints its output.
+     * @param fd      Where the printer prints its output.
      * @param ielem   The index of the current element. This may for
      *                example be used in combination with \p nelems to
      *                determine when a comma should be printed to
@@ -48,7 +48,7 @@ typedef struct {
      * @param elem    The linked list element whose contents are going
      *                to be printed.
      */
-    void (*elem)(FILE * sink, size_t ielem, size_t nelems, void * elem);
+    void (*elem)(FILE * fd, size_t ielem, size_t nelems, void * elem);
 
 
 
@@ -58,12 +58,12 @@ typedef struct {
      *                such as closing brackets to the linked list
      *                elements.
      *
-     * @param sink    Where the printer prints its output.
+     * @param fd      Where the printer prints its output.
      * @param nelems  The total number of elements in the linked list.
      *                This may for example be used to print the length
      *                of the array.
      */
-    void (*post)(FILE * sink, size_t nelems);
+    void (*post)(FILE * fd, size_t nelems);
 } llist__Printers;
 
 
@@ -205,25 +205,25 @@ void llist__prepend (LinkedList * lst, void * item);
  *        char name[10];
  *    };
  *
- *    static void printer_pre (FILE * sink, size_t) {
- *        fprintf(sink, "{\n");
+ *    static void printer_pre (FILE * fd, size_t) {
+ *        fprintf(fd, "{\n");
  *    }
  *
- *    static void printer_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
+ *    static void printer_elem (FILE * fd, size_t idx, size_t nelems, void * p) {
  *        struct task task = *((struct task *) p);
- *        fprintf(sink, "  {\n");
- *        fprintf(sink, "         name: %s,\n", task.name);
- *        fprintf(sink, "     progress: ");
+ *        fprintf(fd, "  {\n");
+ *        fprintf(fd, "         name: %s,\n", task.name);
+ *        fprintf(fd, "     progress: ");
  *        for (size_t i = 10; i <= 100; i+=10) {
- *            fprintf(sink, "%s", task.progress >= i ? "\u2588" : "\u2591");
+ *            fprintf(fd, "%s", task.progress >= i ? "\u2588" : "\u2591");
  *        }
- *        fprintf(sink, "\n");
- *        fprintf(sink, "  }");
- *        fprintf(sink, "%s", idx < nelems - 1 ? ",\n" : "\n");
+ *        fprintf(fd, "\n");
+ *        fprintf(fd, "  }");
+ *        fprintf(fd, "%s", idx < nelems - 1 ? ",\n" : "\n");
  *    }
  *
- *    static void printer_post (FILE * sink, size_t) {
- *        fprintf(sink, "}\n");
+ *    static void printer_post (FILE * fd, size_t) {
+ *        fprintf(fd, "}\n");
  *    }
  *
  *    int main (void) {
@@ -288,9 +288,9 @@ void llist__prepend (LinkedList * lst, void * item);
  *                  is NULL. If \p printers itself is NULL, all of its
  *                  printer functions will be substituted with default
  *                  functions.
- * @param sink      Where the output should be written. Typically,
+ * @param fd        Where the output should be written. Typically,
  *                  `stdout`.
  */
-void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * sink);
+void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * fd);
 
 #endif

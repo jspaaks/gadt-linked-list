@@ -106,13 +106,13 @@ void llist__prepend (LinkedList * lst, void * item) {
     llist__insert(0, item, lst);
 }
 
-void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * sink) {
+void llist__print (const LinkedList * lst, const llist__Printers * printers, FILE * fd) {
 
     // -- print preamble
     if (printers == NULL || printers->pre == NULL) {
-        fprintf(sink, "[");
+        fprintf(fd, "[");
     } else {
-        printers->pre(sink, lst->nelems);
+        printers->pre(fd, lst->nelems);
     }
 
     // -- print each elem
@@ -120,9 +120,9 @@ void llist__print (const LinkedList * lst, const llist__Printers * printers, FIL
     size_t i = 0;
     while (curr != NULL) {
         if (printers == NULL || printers->elem == NULL) {
-            fprintf(sink, "%p%s", curr->payload, curr->next == NULL ? "" : ", ");
+            fprintf(fd, "%p%s", curr->payload, curr->next == NULL ? "" : ", ");
         } else {
-            printers->elem(sink, i, lst->nelems, curr->payload);
+            printers->elem(fd, i, lst->nelems, curr->payload);
         }
         curr = curr->next;
         i++;
@@ -130,8 +130,8 @@ void llist__print (const LinkedList * lst, const llist__Printers * printers, FIL
 
     // -- print postamble
     if (printers == NULL || printers->post == NULL) {
-        fprintf(sink, "]\n");
+        fprintf(fd, "]\n");
     } else {
-        printers->post(sink, lst->nelems);
+        printers->post(fd, lst->nelems);
     }
 }

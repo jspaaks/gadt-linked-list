@@ -4,28 +4,28 @@
 
 typedef llist__Printers Printers;
 
-static void printer_pre (FILE * sink, size_t nelems) {
-    fprintf(sink, " -- LinkedList[%zu] = {", nelems);
+static void printer_pre (FILE * fd, size_t nelems) {
+    fprintf(fd, " -- LinkedList[%zu] = {", nelems);
 }
 
-static void printer_int_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
+static void printer_int_elem (FILE * fd, size_t idx, size_t nelems, void * p) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%d, ", *((int *) p));
+        fprintf(fd, "%d, ", *((int *) p));
     } else {
-        fprintf(sink, "%d", *((int *) p));
+        fprintf(fd, "%d", *((int *) p));
     }
 }
 
-static void printer_float_elem (FILE * sink, size_t idx, size_t nelems, void * p) {
+static void printer_float_elem (FILE * fd, size_t idx, size_t nelems, void * p) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%.2f, ", *((float *) p));
+        fprintf(fd, "%.2f, ", *((float *) p));
     } else {
-        fprintf(sink, "%.2f", *((float *) p));
+        fprintf(fd, "%.2f", *((float *) p));
     }
 }
 
-static void printer_post (FILE * sink, size_t) {
-    fprintf(sink, "}\n");
+static void printer_post (FILE * fd, size_t) {
+    fprintf(fd, "}\n");
 }
 
 static bool filter (void * p) {

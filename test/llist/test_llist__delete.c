@@ -31,12 +31,12 @@ static void teardown (void) {
     llist__destroy(&lst);
 }
 
-static void print_elem (FILE * sink, size_t idx, size_t nelems, void * elem) {
+static void print_elem (FILE * fd, size_t idx, size_t nelems, void * elem) {
     MyStruct my_struct = *((MyStruct *) elem);
     if (idx < nelems - 1) {
-        fprintf(sink, "{.marked: %s, .data: %d}, ", my_struct.marked ? "true" : "false", my_struct.data);
+        fprintf(fd, "{.marked: %s, .data: %d}, ", my_struct.marked ? "true" : "false", my_struct.data);
     } else {
-        fprintf(sink, "{.marked: %s, .data: %d}", my_struct.marked ? "true" : "false", my_struct.data);
+        fprintf(fd, "{.marked: %s, .data: %d}", my_struct.marked ? "true" : "false", my_struct.data);
     }
 }
 

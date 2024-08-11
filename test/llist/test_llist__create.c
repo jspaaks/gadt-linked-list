@@ -15,11 +15,11 @@ static void teardown (void) {
     llist__destroy(&lst);
 }
 
-static void print_elem (FILE * sink, size_t idx, size_t nelems, void * elem) {
+static void print_elem (FILE * fd, size_t idx, size_t nelems, void * elem) {
     if (idx < nelems - 1) {
-        fprintf(sink, "%d, ", *((int *) elem));
+        fprintf(fd, "%d, ", *((int *) elem));
     } else {
-        fprintf(sink, "%d", *((int *) elem));
+        fprintf(fd, "%d", *((int *) elem));
     }
 }
 
